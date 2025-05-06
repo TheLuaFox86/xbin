@@ -77,6 +77,6 @@ bitx.objects = {
 			a[i] = 0
 		end
 		return a
-	end
+	end,
 }
 return bitx
