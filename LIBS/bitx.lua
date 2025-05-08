@@ -78,5 +78,27 @@ bitx.objects = {
 		end
 		return a
 	end,
+	xbci = function(busses)
+		local a = {}
+		for b=0, busses do
+			c = {}
+			for cs=1, 32 do
+				c[cs] = {}
+			end
+			a[b] = c
+		end
+		function a:add(proxy, cs, bus)
+			if self[bus] then
+				if self[bus][cs] then
+					self[bus][cs] = proxy
+				else
+					error("Invalid CS " .. cs, 1)
+				end
+			else
+				error("Invalid Bus " .. bus, 1)
+			end
+		end
+		return a
+	end,
 }
 return bitx

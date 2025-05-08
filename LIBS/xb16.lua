@@ -6,7 +6,7 @@ xb.new = function(callback, _ram, _banks)
 	local banks = _banks
 	local inst = {}
 	inst.SXI = function(cs, bus, inst, ...)
-		ram, banks = callback('xbci')[cs][bus][inst](ram, banks, ...)
+		ram, banks = callback('xbci')[bus][cs][inst](ram, banks, ...)
 	end
 	inst.SB = function(value, bank)
 		banks[bank] = value
@@ -29,14 +29,14 @@ xb.new = function(callback, _ram, _banks)
 		end
 		banks[bank] = bitx.frombool(load('return ' .. x .. _op .. y)())
 	end
-	inst.GBL = function(times)
+	inst.GBN = function(times)
 		callback('goback', times)
 	end
 	inst.BFR = function(part)
 		callback("boot", ram[part])
 	end
 	inst.BFX = function(cs, bus)
-		callback("boot", callback('xbci')[bus][cs].boot)
+		callback("boot", callback('xbci')[bus][cs].boot(ram, banks))
 	end
 	inst.IF = function(bool, ei)
 		if bitx.tobool(bool) == true then
@@ -45,8 +45,8 @@ xb.new = function(callback, _ram, _banks)
 			callback('goforw', ei)
 		end
 	end
-	inst.CRY = function()
-		error("VM CRY", 0)
+	inst.CRY = function(a, b, c)
+		error("VM CRY: " .. a .. b .. c, 0)
 	end
 	return function(_inst, ...)
 		local vals = {}
