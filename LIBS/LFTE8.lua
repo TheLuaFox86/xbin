@@ -1,4 +1,4 @@
-local _chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 \n#-_abcdefghijklmnopqrstuvwxyz@.()[]{}<>/\\+=&%$©|•," .. '"' .. "'?~	"
+local _chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 \n#-_abcdefghijklmnopqrstuvwxyz@.()[]{}<>/\\+=&%$©|•," .. '"' .. "'?~:;	"
 local out = {}
 out.name = "LFTE8"
 out.chars = {}
